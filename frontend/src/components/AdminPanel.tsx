@@ -1,10 +1,11 @@
-export type Shoes = {
-  id: number
-  shoes_name: string
+import type {Shoes} from "../App"
+
+
+interface Props {
+  shoes: Array<Shoes>
 }
 
-
-export function AdminPanel(shoes: Array<string> | null) {
+export function AdminPanel(props: Props) {
     return (
         <>
   <div className="flex">
@@ -275,7 +276,7 @@ export function AdminPanel(shoes: Array<string> | null) {
     </div>
     <div className="px-6 pt-6 2xl:container">
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {Array.from(shoes).map(shoe => <div>{shoe.shoes_name}</div>)}
+        {props.shoes.map(shoe => <div>{shoe.shoes_name}</div>)}
       </div>
     </div>
   </div>

@@ -30,8 +30,7 @@ export function AdminPanel() {
       </div>
       <ul className="space-y-2 tracking-wide mt-8">
         <li>
-          <a
-            href="#"
+          <div
             className="relative px-4 py-3 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-sky-600 to-cyan-400"
           >
             <svg className="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
@@ -50,12 +49,11 @@ export function AdminPanel() {
             </svg>
             <span className="-mr-1 font-medium">
               <Link to={`viewdata/shoes`}>Модели обуви</Link>
-              </span>
-          </a>
+            </span>
+          </div>
         </li>
         <li>
-          <a
-            href="#"
+          <div
             className="px-4 py-3 flex items-center space-x-4 rounded-md text-white-600 group"
           >
             <svg
@@ -78,11 +76,10 @@ export function AdminPanel() {
             <span className="group-hover:text-white-700">
               <Link to={`viewdata/supplies`}>Поставки</Link>
             </span>
-          </a>
+          </div>
         </li>
         <li>
-          <a
-            href="#"
+          <div
             className="px-4 py-3 flex items-center space-x-4 rounded-md text-white-600 group"
           >
             <svg
@@ -102,12 +99,14 @@ export function AdminPanel() {
                 d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"
               />
             </svg>
-            <span className="group-hover:text-white-700">Заказы</span>
-          </a>
+            
+            <span className="group-hover:text-white-700">
+            <Link to={`viewdata/orders`}>Заказы</Link>
+              </span>
+          </div>
         </li>
         <li>
-          <a
-            href="#"
+          <div
             className="px-4 py-3 flex items-center space-x-4 rounded-md text-white-600 group"
           >
             <svg
@@ -125,12 +124,13 @@ export function AdminPanel() {
                 d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"
               />
             </svg>
-            <span className="group-hover:text-white-700">Поставщики</span>
-          </a>
+            <span className="group-hover:text-white-700">
+              <Link to={`viewdata/suppliers`}>Поставщики</Link>
+            </span>
+          </div>
         </li>
         <li>
-          <a
-            href="#"
+          <div
             className="px-4 py-3 flex items-center space-x-4 rounded-md text-white-600 group"
           >
             <svg
@@ -150,8 +150,10 @@ export function AdminPanel() {
                 clipRule="evenodd"
               />
             </svg>
-            <span className="group-hover:text-white-700">Продавцы</span>
-          </a>
+            <span className="group-hover:text-white-700">
+              <Link to={`viewdata/sellers`}>Продавцы</Link>
+            </span>
+          </div>
         </li>
       </ul>
     </div>

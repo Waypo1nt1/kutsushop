@@ -13,7 +13,7 @@ const Orders = () => {
 
   // TODO
   useEffect(() => {
-      const url = "http://localhost:3000/data?table=suppliers"
+      const url = "http://localhost:3000/data?table=sellers"
       axios.get(url).then((response) => {
         setShoes(response.data)
       })
@@ -21,7 +21,7 @@ const Orders = () => {
 
 
   return (
-    <PageWrapper header="Поставщики">
+    <PageWrapper header="Продавцы">
       {shoes.map((shoe) => (
         <div key={shoe.id}>{shoe.shoes_name}</div>
       ))}

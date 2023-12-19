@@ -9,7 +9,8 @@ import {
 import Orders from "./components/pages/orders"
 import Shoes from './components/pages/shoes'
 import Suppliers from './components/pages/suppliers'
-
+import Supplies from './components/pages/supplies'
+import Sellers from './components/pages/sellers'
 
 const router = createBrowserRouter([
   {
@@ -22,11 +23,19 @@ const router = createBrowserRouter([
       },
       {
         path: "viewdata/supplies",
-        element: <Suppliers />,
+        element: <Supplies />,
       },
       {
         path: "viewdata/orders",
         element: <Orders />,
+      },
+      {
+        path: "viewdata/suppliers",
+        element: <Suppliers />,
+      },
+      {
+        path: "viewdata/sellers",
+        element: <Sellers />,
       },
     ],
   },

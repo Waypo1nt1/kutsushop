@@ -1,30 +1,16 @@
-import axios from "axios"
-import { useState } from 'react'
-import { useEffect } from 'react'
+interface Props {
+  header: string
+  children: React.ReactNode
+}
 
-export interface Shoes {
-    id: number
-    shoes_name: string
-  }
-
-export default function ViewData() {
-    const [shoes, setShoes] = useState<Shoes[]>([])
-    const [isLoggedIn, setLoggedIn] = useState(true)
-
-    useEffect(() => {
-        const url = "http://localhost:3000/data"
-        axios.get(url).then((response) => {
-          setShoes(response.data)
-        })
-      }, [])
-
-    return (
+const PageWrapper = ({header, children}: Props) => {
+  return (
     <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
       <div className=" bg-slate-800 z-10 top-0 h-16 border-b lg:py-2.5">
       <div className="px-6 flex items-center justify-between space-x-4 2xl:container">
-        <h5 hidden className="text-2xl text-white font-medium lg:block">
-          Модели обуви
-        </h5>
+        <h4 hidden className="text-xl text-white font-medium lg:block">
+          {header}
+        </h4>
         <button className="w-12 h-16 -mr-2 border-r lg:hidden">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -120,9 +106,12 @@ export default function ViewData() {
     </div>
     <div className="px-6 pt-6 2xl:container">
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {shoes.map(shoe => <div>{shoe.shoes_name}</div>)}
+        {children}
       </div>
     </div>
   </div>
-    )
+  )
 }
+
+
+export default PageWrapper

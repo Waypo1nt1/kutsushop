@@ -6,9 +6,9 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import ViewData from "./components/ViewDataShoes.tsx"
-import ViewDataSuppliers from './components/ViewDataSuppliers'
-import ViewDataOrders from './components/ViewDataOrders'
+import Orders from "./components/pages/orders"
+import Shoes from './components/pages/shoes'
+import Suppliers from './components/pages/suppliers'
 
 
 const router = createBrowserRouter([
@@ -18,15 +18,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: "viewdata/shoes",
-        element: <ViewData />,
+        element: <Shoes />,
       },
       {
         path: "viewdata/supplies",
-        element: <ViewDataSuppliers />,
+        element: <Suppliers />,
       },
       {
         path: "viewdata/orders",
-        element: <ViewDataOrders />,
+        element: <Orders />,
       },
     ],
   },

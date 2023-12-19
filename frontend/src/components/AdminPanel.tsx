@@ -1,4 +1,10 @@
-export function AdminPanel() {
+export type Shoes = {
+  id: number
+  shoes_name: string
+}
+
+
+export function AdminPanel(shoes: Array<string> | null) {
     return (
         <>
   <div className="flex">
@@ -269,7 +275,7 @@ export function AdminPanel() {
     </div>
     <div className="px-6 pt-6 2xl:container">
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <div>asdasdasd</div>
+        {Array.from(shoes).map(shoe => <div>{shoe.shoes_name}</div>)}
       </div>
     </div>
   </div>

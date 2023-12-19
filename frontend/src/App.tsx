@@ -1,22 +1,41 @@
 import { useState } from 'react'
+import { useEffect } from 'react'
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
 import {Footer} from './components/Footer'
 import {AdminPanel} from './components/AdminPanel'
 import {LoginForm} from './components/LoginForm'
+import axios from "axios"
 
 import './app.css'
 
-function App() {
-  //const [count, setCount] = useState(0)
+export type Shoes = {
+  id: number
+  shoes_name: string
+}
 
+
+function App() {
+  const [shoes, setShoes] = useState<Shoes[] | null>()
+  useEffect(() => {
+    const url = "http://localhost:3000/data"
+    axios.get(url).then((response) => {
+      setShoes(response.data)
+    })
+  }, [])
   let isLoggedIn = true
   let content;
-  if (isLoggedIn) {
-    content = <AdminPanel />
-  } else {
-    content = <LoginForm />
-  }
+  <div>
+    {isLoggedIn ? (
+      content = <AdminPanel shoes={shoes ? shoes.map((shoe) =>
+         {return shoe.shoes_name
+        })
+          : null} />
+    ) : (
+      content = <LoginForm />
+    )}
+  </div>
+  
   return (
     <>
       {content}

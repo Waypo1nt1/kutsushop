@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -29,4 +30,41 @@ func (h *Handler) GetAllData(w http.ResponseWriter, r *http.Request) {
 	data, _, _ := h.client.From(tableParam).Select("*", "exact", false).Execute()
 
 	w.Write(data)
+}
+
+func (h *Handler) GetAllSellers(w http.ResponseWriter, r *http.Request) {
+	data, _, _ := h.client.From("sellers").Select("*", "", false).Execute()
+
+	w.Write(data)
+}
+
+func (h *Handler) GetAllShoes(w http.ResponseWriter, r *http.Request) {
+	data, _, _ := h.client.From("shoes").Select("*", "", false).Execute()
+
+	w.Write(data)
+}
+
+func (h *Handler) CreatShoesSales(w http.ResponseWriter, r *http.Request) {
+
+	type Payload struct {
+		ShoesId  int `json:"shoes_id"`
+		Price    int `json:"price"`
+		Quantity int `json:"quantity"`
+		SellerID int `json:"seller_id"`
+	}
+
+	var p Payload
+
+	json.NewDecoder(r.Body).Decode(&p)
+
+	data_to_insert := map[string]any{
+		"shoes_id":          p.ShoesId,
+		"proceed":           p.Price,
+		"shoes_sale_amount": p.Quantity,
+		"seller_id":         p.SellerID,
+	}
+
+	h.client.From("sale_of_shoes").Insert(data_to_insert, false, "", "", "").Execute()
+
+	w.WriteHeader(http.StatusCreated)
 }

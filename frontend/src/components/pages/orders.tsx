@@ -23,38 +23,24 @@ const Orders = () => {
 
   return (
     <PageWrapper header="Заказы">
-      {shoes.map((shoe) => (
-        <div key={shoe.id} className="flex justify-between">
-        <div className="bg-slate-800">
-          id выбитого чека
-          <div className="bg-gray-900">
-            {shoe.id}
-          </div>
-        </div>
-        <div className="bg-slate-800">
-          id пары обуви
-          <div className="bg-gray-900">
-            {shoe.shoes_id}
-          </div>
-        </div>
-        <div className="bg-slate-800">
-          Количество продаваемых пар
-        <div className="bg-gray-900">
-          {shoe.shoes_sale_amount}
-        </div>
-        </div>
-        <div className="bg-slate-800">
-          Доход
-        <div className="bg-gray-900">
-          {shoe.proceed}
-          </div>
-        </div>
-        <div className="bg-slate-800">
-          id продавца
-        <div className="bg-gray-900">{shoe.seller_id}</div>
-        </div>
-        </div>
+      <div className={`${shoes.length ? "opacity-100 viisble" : "opacity-0 invisible"} transition-opacity duration-500`}>
+      <article className="grid grid-cols-5  px-10 py-5 text-white text-center">
+            <div className="underline text-xl">Id</div>
+            <div className="underline text-xl">Id модели обуви</div>
+            <div className="underline text-xl">Доход</div>
+            <div className="underline text-xl">Id продавца</div>
+            <div className="underline text-xl">Количество</div>
+          </article>
+        {shoes.map((shoe) => (
+          <article key={shoe.id} className={`grid grid-cols-5 bg-[#333333] px-10 py-5 border mb-3 text-center`}>
+            <div >{shoe.id}</div>
+            <div>{shoe.shoes_id}</div>
+            <div >{shoe.proceed}</div>
+            <div >{shoe.seller_id}</div>
+            <div >{shoe.shoes_sale_amount}</div>
+          </article>
       ))}
+    </div>
     </PageWrapper>
   )
 }

@@ -14,7 +14,7 @@ function App() {
 
   return (
     <>
-    {isLoggedIn ? <ProductForm /> : <LoginForm />}
+    {isLoggedIn ? <AdminPanel /> : <LoginForm />}
       <Footer />
     </>
   )

@@ -69,6 +69,7 @@ const PageWrapper = ({header, children}: Props) => {
               />
             </svg>
           </button>
+          <a target="_blank" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley">
           <button
             aria-label="chat"
             className="w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200"
@@ -88,6 +89,8 @@ const PageWrapper = ({header, children}: Props) => {
               />
             </svg>
           </button>
+          </a>
+          <a target="_blank" href="https://i1.sndcdn.com/artworks-yeJue1eGe975QlkJ-HGmkuA-t500x500.jpg">
           <button
             aria-label="notification"
             className="w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200"
@@ -101,10 +104,11 @@ const PageWrapper = ({header, children}: Props) => {
               <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
             </svg>
           </button>
+          </a>
         </div>
       </div>
     </div>
-    <div className="px-6 pt-6 2xl:container min-w-full bg-slate-700">
+    <div className="">
       {children}
     </div>
   </div>

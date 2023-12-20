@@ -26,6 +26,9 @@ func main() {
 	h := handler.New(API_URL, API_KEY)
 
 	r.Get("/data", h.GetAllData)
+	r.Get("/sellers", h.GetAllSellers)
+	r.Get("/shoes", h.GetAllShoes)
+	r.Post("/shoes_sales", h.CreatShoesSales)
 
 	http.ListenAndServe(":3000", r)
 }

@@ -11,7 +11,7 @@ const Orders = () => {
   const [shoes, setShoes] = useState<Shoes[]>([])
 
 
-  
+
   useEffect(() => {
       const url = "http://localhost:3000/data?table=suppliers"
       axios.get(url).then((response) => {
@@ -22,22 +22,19 @@ const Orders = () => {
 
   return (
     <PageWrapper header="Поставщики">
-      {shoes.map((shoe) => (
-        <div key={shoe.id} className="flex justify-between">
-        <div className="bg-slate-800">
-          id поставщика
-          <div className="bg-gray-900">
-            {shoe.id}
-          </div>
-        </div>
-        <div className="bg-slate-800">
-          Фирма
-          <div className="bg-gray-900">
-            {shoe.company}
-          </div>
-        </div>
-        </div>
+    <div className={`${shoes.length ? "opacity-100 viisble" : "opacity-0 invisible"} transition-opacity duration-500`}>
+      <article className="grid grid-cols-10  px-10 py-5 text-white">
+            <div className="underline text-xl">Id</div>
+            <div className="underline text-xl col-span-9">Поставщик</div>
+          </article>
+        {shoes.map((shoe) => (
+          <article key={shoe.id} className={`grid grid-cols-10 bg-[#333333] px-10 py-5 border mb-3`}>
+            <div >{shoe.id}</div>
+            <div className="col-span-9">{shoe.company}</div>
+          </article>
       ))}
+    </div>
+
     </PageWrapper>
   )
 }

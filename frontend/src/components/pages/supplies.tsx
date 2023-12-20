@@ -26,42 +26,24 @@ const Orders = () => {
 
   return (
     <PageWrapper header="Поставки">
-      {shoes.map((shoe) => (
-        <div key={shoe.supply_id} className="flex justify-between">
-        <div className="bg-slate-800">
-          id поставки
-          <div className="bg-gray-900">
-            {shoe.supply_id}
-          </div>
-        </div>
-        <div className="bg-slate-800">
-          id пары обуви
-          <div className="bg-gray-900">
-            {shoe.shoes_id}
-          </div>
-        </div>
-        <div className="bg-slate-800">
-          id поставщика
-        <div className="bg-gray-900">
-          {shoe.supplier_id}
-        </div>
-        </div>
-        <div className="bg-slate-800">
-          Количество поставляемых пар
-        <div className="bg-gray-900">
-          {shoe.shoes_supply_amount}
-          </div>
-        </div>
-        <div className="bg-slate-800">
-          Цена поставки
-        <div className="bg-gray-900">{shoe.supply_price}</div>
-        </div>
-        <div className="bg-slate-800">
-          id менеджера поставки
-        <div className="bg-gray-900">{shoe.supply_manager_id}</div>
-        </div>
-        </div>
+      <div className={`${shoes.length ? "opacity-100 viisble" : "opacity-0 invisible"} transition-opacity duration-500`}>
+      <article className="grid grid-cols-5  px-10 py-5 text-white text-center">
+            <div className="underline text-xl">Id поставки</div>
+            <div className="underline text-xl">Id обуви</div>
+            <div className="underline text-xl">Количество</div>
+            <div className="underline text-xl">Id поставщика</div>
+            <div className="underline text-xl">Сумма поставки</div>
+          </article>
+        {shoes.map((shoe) => (
+          <article key={shoe.shoes_id} className={`grid grid-cols-5 bg-[#333333] px-10 py-5 border mb-3 text-center`}>
+            <div >{shoe.supply_id}</div>
+            <div >{shoe.shoes_id}</div>
+            <div>{shoe.shoes_supply_amount}</div>
+            <div >{shoe.supplier_id}</div>
+            <div >{shoe.supply_price}</div>
+          </article>
       ))}
+    </div>
     </PageWrapper>
   )
 }

@@ -19,6 +19,7 @@ func main() {
 		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE"},
 		AllowedHeaders: []string{"*"},
 	}))
+
 	API_URL := "https://jiugfvhwjrmchiomueyo.supabase.co"
 	API_KEY := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImppdWdmdmh3anJtY2hpb211ZXlvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwMjgyODkwMSwiZXhwIjoyMDE4NDA0OTAxfQ.GGl3sVS9RBqTMwOPjWbE8w_NOMW9y715vrbGYarHs8c"
 

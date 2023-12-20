@@ -11,9 +11,8 @@ const Orders = () => {
   const [shoes, setShoes] = useState<Shoes[]>([])
 
 
-  // TODO
     useEffect(() => {
-        const url = "http://localhost:3000/data"
+        const url = "http://localhost:3000/data?table=shoes"
         axios.get(url).then((response) => {
           setShoes(response.data)
         })

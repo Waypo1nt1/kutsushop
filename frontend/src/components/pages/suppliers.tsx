@@ -4,14 +4,14 @@ import axios from "axios"
 
 interface Shoes {
   id: number
-  shoes_name: string
+  company: string
 }
 
 const Orders = () => {
   const [shoes, setShoes] = useState<Shoes[]>([])
 
 
-  // TODO
+  
   useEffect(() => {
       const url = "http://localhost:3000/data?table=suppliers"
       axios.get(url).then((response) => {
@@ -23,7 +23,9 @@ const Orders = () => {
   return (
     <PageWrapper header="Поставщики">
       {shoes.map((shoe) => (
-        <div key={shoe.id}>{shoe.shoes_name}</div>
+        <>
+        <div key={shoe.id}>{shoe.company}</div>
+        </>
       ))}
     </PageWrapper>
   )

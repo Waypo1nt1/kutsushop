@@ -1,8 +1,16 @@
 
-import { Outlet, Link} from "react-router-dom"
-
+import { Outlet, Link } from "react-router-dom"
+import { useState, useEffect } from 'react'
 
 export function AdminPanel() {
+    const [selected, setSelected] = useState('')
+
+    useEffect(() => {
+    if (window.location.pathname == "/viewdata/shoes"){
+      console.log(window.location.pathname)
+      setSelected("shoes")
+      }}, [window.location.pathname])
+
     return (
         <>
   <div className="flex">
@@ -31,7 +39,7 @@ export function AdminPanel() {
       <ul className="space-y-2 tracking-wide mt-8">
         <li>
           <div
-            className="relative px-4 py-3 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-sky-600 to-cyan-400"
+            className={`${selected == "shoes" ? "bg-gradient-to-r from-sky-600 to-cyan-400" : ""} relative px-4 py-3 flex items-center space-x-4 rounded-xl text-white`}
           >
             <svg className="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
               <path
@@ -49,7 +57,7 @@ export function AdminPanel() {
             </svg>
             <span className="-mr-1 font-medium">
               <Link to={`viewdata/shoes`}>Модели обуви</Link>
-            </span>
+              </span>
           </div>
         </li>
         <li>

@@ -23,7 +23,10 @@ func New(api_url, api_key string) *Handler {
 }
 
 func (h *Handler) GetAllData(w http.ResponseWriter, r *http.Request) {
-	data, _, _ := h.client.From("shoes").Select("*", "exact", false).Execute()
+	tableParam := r.URL.Query().Get("table")
+	fmt.Println(tableParam)
+
+	data, _, _ := h.client.From(tableParam).Select("*", "exact", false).Execute()
 
 	w.Write(data)
 }

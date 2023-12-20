@@ -11,6 +11,7 @@ import Shoes from './components/pages/shoes'
 import Suppliers from './components/pages/suppliers'
 import Supplies from './components/pages/supplies'
 import Sellers from './components/pages/sellers'
+import ProductForm from './components/ProductForm'
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/form",
+    element: <ProductForm />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

@@ -2,7 +2,6 @@ import { useState } from 'react'
 import {Footer} from './components/Footer'
 import {AdminPanel} from './components/AdminPanel'
 import {LoginForm} from './components/LoginForm'
-import { ProductForm } from './components/ProductForm'
 
 import './index.css'
 

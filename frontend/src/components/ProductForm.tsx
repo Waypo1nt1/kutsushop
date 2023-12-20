@@ -14,7 +14,7 @@ interface Seller {
   surname: string
 }
 
-export function ProductForm() {
+export default function ProductForm() {
   const [shoes, setShoes] = useState<Shoes[]>([])
   const [sellers, setSellers] = useState<Seller[]>([])
 

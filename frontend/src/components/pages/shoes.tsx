@@ -22,7 +22,20 @@ const Orders = () => {
   return (
     <PageWrapper header="Модели обуви">
       {shoes.map((shoe) => (
-        <div key={shoe.id}>{shoe.shoes_name}</div>
+        <div key={shoe.id} className="flex justify-between">
+        <div className="bg-slate-800">
+          id пары обуви
+          <div className="bg-gray-900">
+            {shoe.id}
+          </div>
+        </div>
+        <div className="bg-slate-800">
+          Экземпляр
+          <div className="bg-gray-900">
+            {shoe.shoes_name}
+          </div>
+        </div>
+        </div>
       ))}
     </PageWrapper>
   )

@@ -104,10 +104,8 @@ const PageWrapper = ({header, children}: Props) => {
         </div>
       </div>
     </div>
-    <div className="px-6 pt-6 2xl:container">
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {children}
-      </div>
+    <div className="px-6 pt-6 2xl:container min-w-full bg-slate-700">
+      {children}
     </div>
   </div>
   )

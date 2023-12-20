@@ -25,12 +25,38 @@ const Orders = () => {
   return (
     <PageWrapper header="Продавцы">
       {shoes.map((shoe) => (
-        <>
-          <div key={shoe.id}>{shoe.surname}</div>
-          <div key={shoe.id}>{shoe.name}</div>
-          <div key={shoe.id}>{shoe.middle_name}</div>
-          <div key={shoe.id}>{shoe.phone_number}</div>
-        </>
+        <div key={shoe.id} className="flex justify-between">
+        <div className="bg-slate-800">
+          id продавца
+          <div className="bg-gray-900">
+            {shoe.id}
+          </div>
+        </div>
+        <div className="bg-slate-800">
+          Фамилия
+          <div className="bg-gray-900">
+            {shoe.surname}
+          </div>
+        </div>
+        <div className="bg-slate-800">
+          Имя
+        <div className="bg-gray-900">
+          {shoe.name}
+        </div>
+        </div>
+        <div className="bg-slate-800">
+          Отчество
+        <div className="bg-gray-900">
+          {shoe.middle_name}
+          </div>
+        </div>
+        <div className="bg-slate-800">
+          Номер телефона
+        <div className="bg-gray-900">
+          {shoe.phone_number}
+          </div>
+        </div>
+        </div>
       ))}
     </PageWrapper>
   )

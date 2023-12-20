@@ -6,13 +6,11 @@ export function Footer() {
             <div className="flex flex-wrap items-center justify-between md:flex-nowrap">
                 <div className="w-full space-x-12 flex justify-center text-gray-300 sm:w-7/12 md:justify-start">
                     <ul className="list-disc list-inside space-y-8">
-                        <li><a href="#" className="hover:text-sky-400 transition">Home</a></li>
-
-                        <li><a href="#" className="hover:text-sky-400 transition">About</a></li>
-                        <li><a href="#" className="hover:text-sky-400 transition">Guide</a></li>
-                        <li><a href="#" className="hover:text-sky-400 transition">Blocks</a></li>
-                        <li><a href="#" className="hover:text-sky-400 transition">Contact</a></li>
-                        <li><a href="#" className="hover:text-sky-400 transition">Terms of Use</a></li>
+                        <li><a href="http://localhost:5173/viewdata/shoes" className="hover:text-sky-400 transition">Главная</a></li>
+                        <li><a href="https://mospolytech.ru/" className="hover:text-sky-400 transition">Информация</a></li>
+                        <li><a href="#" className="hover:text-sky-400 transition">Помощь</a></li>
+                        <li><a href="#" className="hover:text-sky-400 transition">Контакты</a></li>
+                        <li><a href="#" className="hover:text-sky-400 transition">Правила использования</a></li>
                     </ul>
 
                     <ul role="list" className="space-y-8">
@@ -83,16 +81,16 @@ export function Footer() {
                     </ul>
                 </div>
                 <div className="w-10/12 m-auto  mt-16 space-y-6 text-center sm:text-left sm:w-5/12 sm:mt-auto">
-                    <span className="block text-gray-300">We change the way UI components librairies are used</span>
+                    <span className="block text-gray-300">Административная часть обувного магазина</span>
 
-                    <span className="block text-gray-300">Tailus Blocks &copy; 2021</span>
+                    <span className="block text-gray-300">Moscow Polytech &copy; 2023</span>
 
                     <span className="flex justify-between text-white"> 
-                        <a href="#" className="font-semibold">Terms of Use </a>
-                        <a href="#" className="font-semibold"> Privacy Policy</a> 
+                        <a href="#" className="font-semibold">Правила использования</a>
+                        <a href="#" className="font-semibold">Политика приватности</a> 
                     </span>
 
-                    <span className="block text-gray-300">Need help? <a href="#" className="font-semibold text-white"> Contact Us</a></span>
+                    <span className="block text-gray-300">Нужна помощь? <a href="#" className="font-semibold text-white"> Контакты</a></span>
                 </div>
             </div>
         </div>

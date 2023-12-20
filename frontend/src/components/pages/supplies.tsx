@@ -28,7 +28,11 @@ const Orders = () => {
     <PageWrapper header="Поставки">
       {shoes.map((shoe) => (
         <>
-        <div key={shoe.id}>{shoe.shoes_id}</div>
+        <div className="bg-slate-800">
+          id поставщика
+          <div className="bg-gray-900" key={shoe.id}>{shoe.shoes_id}
+          </div>
+        </div>
         <div key={shoe.id}>{shoe.supplier_id}</div>
         <div key={shoe.id}>{shoe.shoes_supply_amount}</div>
         <div key={shoe.id}>{shoe.supply_price}</div>

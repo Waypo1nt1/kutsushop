@@ -12,6 +12,7 @@ import Suppliers from './components/pages/suppliers'
 import Supplies from './components/pages/supplies'
 import Sellers from './components/pages/sellers'
 import ProductForm from './components/ProductForm'
+import AdminForm from './components/AdminForm'
 
 const router = createBrowserRouter([
   {
@@ -43,7 +44,11 @@ const router = createBrowserRouter([
   {
     path: "/form",
     element: <ProductForm />
-  }
+  },
+  {
+    path: "/adminform",
+    element: <AdminForm />
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

@@ -42,6 +42,10 @@ export default function ProductForm() {
       price : Number(target.shoes_price.value),
       seller_id : Number(target.seller.value),
     }).then(() => {
+      target.shoes_name.value = "dis"
+      target.shoes_count.value = ""
+      target.shoes_price.value = ""
+      target.seller.value = "dis"
       console.log("post success")
     })
   }

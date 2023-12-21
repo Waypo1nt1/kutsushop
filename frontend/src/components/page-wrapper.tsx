@@ -4,7 +4,7 @@ interface Props {
   button?: React.ReactNode 
 }
 
-const PageWrapper = ({header, children}: Props) => {
+const PageWrapper = ({header, children, button}: Props) => {
   return (
     <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
       <div className=" bg-slate-800 z-10 top-0 h-16 border-b lg:py-2.5">
@@ -13,11 +13,7 @@ const PageWrapper = ({header, children}: Props) => {
         <h4 hidden className="text-xl text-white font-medium lg:block">
           {header}
         </h4>
-        <button className="w-8 h-8 bg-blue-500 items-center justify-center rounded-full border border-white">
-          <svg className="mx-auto my-auto" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 12H20M12 4V20" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
+          {button}
         </div>
         <button className="w-12 h-16 -mr-2 border-r lg:hidden">
           <svg

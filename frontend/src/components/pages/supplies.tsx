@@ -26,6 +26,7 @@ const Orders = () => {
 
   return (
     <PageWrapper header="Поставки">
+      {window.sessionStorage.getItem('is_admin') === 'true' ? 
       <div className={`${shoes.length ? "opacity-100 viisble" : "opacity-0 invisible"} transition-opacity duration-500`}>
       <article className="grid grid-cols-5  px-10 py-5 text-white text-center">
             <div className="underline text-xl">Id поставки</div>
@@ -43,7 +44,9 @@ const Orders = () => {
             <div >{shoe.supply_price}</div>
           </article>
       ))}
-    </div>
+    </div> : <article className="px-10 py-5 text-white">
+             <div className=" text-xl">У вас нет доступа к этим данным: необходим аккаунт администратора</div>
+             </article>}
     </PageWrapper>
   )
 }

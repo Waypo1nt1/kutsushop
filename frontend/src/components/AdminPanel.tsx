@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import Nav from "./nav"
 
 interface Props {
-  handleLogin: (flag: boolean) => void
+  handleLogin: (flag: boolean, isAdmin: boolean, email: string) => void
 }
 
 export function AdminPanel({handleLogin}: Props) {
@@ -36,14 +36,14 @@ export function AdminPanel({handleLogin}: Props) {
           className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28"
         />
         <h5 className="hidden mt-4 text-xl font-semibold text-white-600 lg:block">
-          Попова Екатерина
+          {window.sessionStorage.getItem('email')}
         </h5>
-        <span className="hidden text-white-400 lg:block">Админ</span>
+        <span className="hidden text-white-400 lg:block">{window.sessionStorage.getItem('is_admin') === 'true' ? 'Админ' : 'Продавец'}</span>
       </div>
       <Nav path={location.pathname} />
     </div>
     <div className="px-6 -mx-6 pt-4 flex justify-between items-center border-t">
-      <button onClick={() => handleLogin(false)} className="px-4 py-3 flex items-center space-x-4 rounded-md text-white-600 group">
+      <button onClick={() => handleLogin(false, false, '')} className="px-4 py-3 flex items-center space-x-4 rounded-md text-white-600 group">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"

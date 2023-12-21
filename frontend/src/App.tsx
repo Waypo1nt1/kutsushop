@@ -8,12 +8,18 @@ import './index.css'
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [email, setEmail] = useState('')
 
-  const handleLogin = (flag: boolean) => {
+  const handleLogin = (flag: boolean, isAdmin: boolean, email: string) => {
     setLoggedIn(flag)
+    setIsAdmin(isAdmin)
+    setEmail(email)
     window.sessionStorage.setItem('is_auth', String(flag))
+    window.sessionStorage.setItem('is_admin', String(isAdmin))
+    window.sessionStorage.setItem('email', email)
   }
-
+  
   useEffect (() => {
     if (window.sessionStorage.getItem('is_auth') === 'true') {
       setLoggedIn(true)
@@ -22,7 +28,7 @@ function App() {
 
   return (
     <>
-    {isLoggedIn ? <AdminPanel handleLogin={handleLogin}/> : <LoginForm handleLogin={handleLogin}/>}
+    {isLoggedIn ? <AdminPanel handleLogin={handleLogin} /> : <LoginForm handleLogin={handleLogin}/>}
       <Footer />
     </>
   )

@@ -1,4 +1,28 @@
+import axios from "axios"
+
 export default function AdminForm() {
+    const onSubmit = (event: React.FormEvent) => {
+        event.preventDefault()
+    
+        const target = event.target as EventTarget & Record<"surname" | "name" | "middlename" | "phone_number" | "email" | "password" ,{value: string}>
+    
+        axios.post("http://localhost:3000/create_sellers", {
+          surname : String(target.surname.value),
+          name : String(target.name.value),
+          middle_name : String(target.middlename.value),
+          phone_number : String(target.phone_number.value),
+        }).then(() => {
+          console.log("sellers post success")
+        })
+
+        axios.post("http://localhost:3000/create_users", {
+          email : String(target.email.value),
+          password : String(target.password.value),
+        }).then(() => {
+          console.log("users post success")
+        })
+      }
+    
     return (
         <div className="bg-gray-100 dark:bg-gray-800 transition-colors duration-300 min-h-full">
          <div className="mx-auto">
@@ -10,7 +34,7 @@ export default function AdminForm() {
             <p className="text-center text-white mb-6">
               Укажите информацию о продавце
             </p>
-            <form className="w-1/3 mx-auto">
+            <form onSubmit={onSubmit} className="w-1/3 mx-auto">
               <div className="flex w-full justify-between">
                 <div className="mb-4">
                     <label className="block text-sm font-bold mb-2">Фамилия</label>

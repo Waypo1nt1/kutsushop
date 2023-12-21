@@ -2,15 +2,16 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 
 interface Props {
-  handleLogin: (flag: boolean) => void
+  handleLogin: (flag: boolean, isAdmin: boolean, email: string) => void
 }
 
 interface Users {
   email: string
   password: string
+  is_admin: boolean
 }
 
-export function LoginForm({handleLogin}: Props) {
+export function LoginForm({handleLogin}: Props  ) {
     const [data, setData] = useState<Users[]>([])
 
     useEffect (() => {
@@ -28,7 +29,7 @@ export function LoginForm({handleLogin}: Props) {
 
       data.forEach(item => {
         if (item.email === email && item.password === password) {
-          handleLogin(true)
+          handleLogin(true, item.is_admin, item.email)
         }
       })
       

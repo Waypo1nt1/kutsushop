@@ -27,7 +27,7 @@ const Orders = () => {
       <article className="grid grid-cols-5  px-10 py-5 text-white text-center">
             <div className="underline text-xl">Id</div>
             <div className="underline text-xl">Id модели обуви</div>
-            <div className="underline text-xl">Доход</div>
+            <div className="underline text-xl">Общая сумма</div>
             <div className="underline text-xl">Id продавца</div>
             <div className="underline text-xl">Количество</div>
           </article>

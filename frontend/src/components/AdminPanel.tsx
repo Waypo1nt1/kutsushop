@@ -1,13 +1,17 @@
 
 import { Outlet, Link, useLocation } from "react-router-dom"
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import Nav from "./nav"
 
-export function AdminPanel() {
+interface Props {
+  handleLogin: (flag: boolean) => void
+}
+
+export function AdminPanel({handleLogin}: Props) {
 
   const location = useLocation()
+
   useEffect(() => {
-    console.log(location.pathname)
   }, [location])
 
 
@@ -39,7 +43,7 @@ export function AdminPanel() {
       <Nav path={location.pathname} />
     </div>
     <div className="px-6 -mx-6 pt-4 flex justify-between items-center border-t">
-      <button className="px-4 py-3 flex items-center space-x-4 rounded-md text-white-600 group">
+      <button onClick={() => handleLogin(false)} className="px-4 py-3 flex items-center space-x-4 rounded-md text-white-600 group">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"

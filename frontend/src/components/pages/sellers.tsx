@@ -13,18 +13,17 @@ interface Shoes {
 const Orders = () => {
   const [shoes, setShoes] = useState<Shoes[]>([])
 
-
   useEffect(() => {
       const url = "http://localhost:3000/data?table=sellers"
       axios.get(url).then((response) => {
         setShoes(response.data)
       })
   }, [])
-
+  
 
   return (
-    <PageWrapper header="Продавцы">
-      <div className={`${shoes.length ? "opacity-100 viisble" : "opacity-0 invisible"} transition-opacity duration-500`}>
+    <PageWrapper header="Продавцы" >
+      <div className={`${shoes.length ? "opacity-100 visible" : "opacity-0 invisible"} transition-opacity duration-500`}>
       <article className="grid grid-cols-5  px-10 py-5 text-white text-center">
             <div className="underline text-xl">Id продавца</div>
             <div className="underline text-xl">Имя</div>
@@ -41,7 +40,7 @@ const Orders = () => {
             <div >{shoe.phone_number}</div>
           </article>
       ))}
-    </div>
+      </div>
     </PageWrapper>
   )
 }

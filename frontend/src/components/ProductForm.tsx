@@ -89,7 +89,7 @@ export default function ProductForm() {
           <label
             className="block text-sm font-bold mb-2"
             htmlFor="shoes_price">
-            Доход
+            Цена
           </label>
           <input
             name="shoes_price"

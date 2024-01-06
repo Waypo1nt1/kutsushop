@@ -8,6 +8,7 @@ interface Shoes {
   shoes_sale_amount: number
   proceed: number
   seller_id: number
+  date_created: string
 }
 
 const Orders = () => {
@@ -42,20 +43,27 @@ const Orders = () => {
     <PageWrapper header="Заказы" button={button}>
       {window.sessionStorage.getItem('is_admin') === 'true' ? 
       <div className={`${shoes.length ? "opacity-100 viisble" : "opacity-0 invisible"} transition-opacity duration-500`}>
-      <article className="grid grid-cols-5  px-10 py-5 text-white text-center">
+      <article className="grid grid-cols-6  px-10 py-5 text-white text-center">
             <div className="underline text-xl">Id</div>
             <div className="underline text-xl">Id модели обуви</div>
             <div className="underline text-xl">Общая сумма</div>
             <div className="underline text-xl">Id продавца</div>
             <div className="underline text-xl">Количество</div>
+            <div className="underline text-xl">Дата</div>
           </article>
         {shoes.map((shoe) => (
-          <article key={shoe.id} className={`grid grid-cols-5 bg-[#333333] px-10 py-5 border mb-3 text-center`}>
+          <article key={shoe.id} className={`grid grid-cols-6 bg-[#333333] px-10 py-5 border mb-3 text-center`}>
             <div >{shoe.id}</div>
             <div>{shoe.shoes_id}</div>
-            <div >{shoe.proceed}</div>
-            <div >{shoe.seller_id}</div>
-            <div >{shoe.shoes_sale_amount}</div>
+            <div>{shoe.proceed}</div>
+            <div>{shoe.seller_id}</div>
+            <div>{shoe.shoes_sale_amount}</div>
+            <div>{shoe.date_created.split(/[-T]/)[0] + '.'}
+                 {shoe.date_created.split(/[-T]/)[1] + '.'}
+                 {shoe.date_created.split(/[-T]/)[2] + ' '}
+                 {shoe.date_created.split(/[-T.]/)[3] + ''}
+
+            </div>
           </article>
       ))}
     </div> : <article className="px-10 py-5 text-white">

@@ -139,7 +139,7 @@ func (h *Handler) GetExcelFile(w http.ResponseWriter, r *http.Request) {
 	f.SetCellValue("Заказы", "C1", "Общая сумма")
 	f.SetCellValue("Заказы", "D1", "ID продавца")
 	f.SetCellValue("Заказы", "E1", "Количество")
-	
+
 	for i, item := range excel_data {
 		f.SetCellValue("Заказы", fmt.Sprintf("A%d", i+2), item["id"])
 		f.SetCellValue("Заказы", fmt.Sprintf("B%d", i+2), item["shoes_id"])

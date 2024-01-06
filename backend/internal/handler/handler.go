@@ -4,8 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/supabase-community/supabase-go"
+	"github.com/xuri/excelize/v2"
+	"github.com/kutsushop/internal/pipes/jsonh"
 )
 
 type Handler struct {
@@ -44,7 +47,7 @@ func (h *Handler) GetAllShoes(w http.ResponseWriter, r *http.Request) {
 	w.Write(data)
 }
 
-func (h *Handler) CreatShoesSales(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) CreateShoesSales(w http.ResponseWriter, r *http.Request) {
 
 	type Payload struct {
 		ShoesId  int `json:"shoes_id"`
@@ -59,7 +62,7 @@ func (h *Handler) CreatShoesSales(w http.ResponseWriter, r *http.Request) {
 
 	data_to_insert := map[string]any{
 		"shoes_id":          p.ShoesId,
-		"proceed":           p.Price,
+		"proceed":           p.Price * p.Quantity,
 		"shoes_sale_amount": p.Quantity,
 		"seller_id":         p.SellerID,
 	}
@@ -67,4 +70,87 @@ func (h *Handler) CreatShoesSales(w http.ResponseWriter, r *http.Request) {
 	h.client.From("sale_of_shoes").Insert(data_to_insert, false, "", "", "").Execute()
 
 	w.WriteHeader(http.StatusCreated)
+}
+
+func (h *Handler) CreateSellers(w http.ResponseWriter, r *http.Request) {
+	type Payload struct {
+		Surname string `json:"surname"`
+		Name string `json:"name"`
+		MiddleName string `json:"middle_name"`
+		PhoneNumber string `json:"phone_number"`
+	}
+	var p Payload
+
+	json.NewDecoder(r.Body).Decode(&p)
+
+	data_to_insert := map[string]any{
+		"surname": p.Surname,
+		"name": p.Name,
+		"middle_name": p.MiddleName,
+		"phone_number": p.PhoneNumber,
+	}
+
+	h.client.From("sellers").Insert(data_to_insert, false, "", "", "").Execute()
+
+	w.WriteHeader(http.StatusCreated)
+}
+
+func (h *Handler) CreateUsers(w http.ResponseWriter, r *http.Request) {
+	type Payload struct {
+		Email string `json:"email"`
+		Password string `json:"password"`
+	}
+	var p Payload
+
+	json.NewDecoder(r.Body).Decode(&p)
+
+	data_to_insert := map[string]any{
+		"email": p.Email,
+		"password": p.Password,
+		"is_admin": false,
+	}
+
+	h.client.From("users").Insert(data_to_insert, false, "", "", "").Execute()
+
+	w.WriteHeader(http.StatusCreated)
+}
+
+func (h *Handler) GetExcelFile(w http.ResponseWriter, r *http.Request) {
+
+	data, _, _ := h.client.From("sale_of_shoes").Select("*", "", false).Execute()
+	
+
+	
+	f := excelize.NewFile()
+	defer func() {
+		if err := f.Close(); err != nil {
+			fmt.Println(err)
+		}
+	}()
+	
+	index, err := f.NewSheet("заказы")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	f.SetCellValue("Заказы", "A1", "ID заказа")
+	f.SetCellValue("Заказы", "B1", "ID модели обуви")
+	f.SetCellValue("Заказы", "C1", "Общая сумма")
+	f.SetCellValue("Заказы", "D1", "ID продавца")
+	f.SetCellValue("Заказы", "E1", "Количество")
+	f.SetCellValue("Заказы", "A2", fmt.Sprintf("%s", string(data[0])))
+
+	f.SetActiveSheet(index)
+
+	filePath := "./заказы.xlsx"
+
+	if err := f.SaveAs("заказы.xlsx"); err != nil {
+		fmt.Println(err)
+	}
+
+	w.Header().Set("Content-Disposition", "attachment; filename="+strconv.Quote("заказы.xlsx"))
+	w.Header().Set("Content-Type", r.Header.Get("Content-Type"))
+	http.ServeFile(w, r, filePath)
+
+	w.WriteHeader(http.StatusOK)
 }

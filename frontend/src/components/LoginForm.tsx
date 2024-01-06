@@ -13,6 +13,7 @@ interface Users {
 
 export function LoginForm({handleLogin}: Props  ) {
     const [data, setData] = useState<Users[]>([])
+    const [invalidpass, setInvalidpass] = useState(false)
 
     useEffect (() => {
       axios.get("http://localhost:3000/users?table=users").then((response) => {
@@ -31,6 +32,9 @@ export function LoginForm({handleLogin}: Props  ) {
         if (item.email === email && item.password === password) {
           handleLogin(true, item.is_admin, item.email)
         }
+        else {
+          setInvalidpass(true)
+        }
       })
       
     }
@@ -48,8 +52,8 @@ export function LoginForm({handleLogin}: Props  ) {
                       <input className="w-full bg-transparent text-gray-600 dark:text-white dark:border-gray-700 rounded-md border border-gray-300 px-3 py-2 text-sm placeholder-gray-600 invalid:border-red-500 dark:placeholder-gray-300" placeholder="Ваш Email" type="email" name="email" id="email" />
 
             <input className="w-full bg-transparent text-gray-600 dark:text-white dark:border-gray-700 rounded-md border border-gray-300 px-3 py-2 text-sm placeholder-gray-600 invalid:border-red-500 dark:placeholder-gray-300" placeholder="Ваш пароль" type="password" name="password" id="password" />
+            {invalidpass ? (<p className="text-red-500">Неверный Email или пароль</p>) : ''}
           </div>
-
           <button type="submit" className="h-9 px-3 w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 focus:bg-blue-700 transition duration-500 rounded-md text-white">
             Войти
           </button>

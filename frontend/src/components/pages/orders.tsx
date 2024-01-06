@@ -20,9 +20,26 @@ const Orders = () => {
         })
       }, [])
 
+      const button = window.sessionStorage.getItem('is_admin') === 'true' ? (<a target="_blank" href="http://localhost:3000/excel"><button className="w-8 h-8 bg-blue-500 items-center justify-center rounded-full border border-white">
+      <svg className="block mx-auto my-auto" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" fill="#ffffff" version="1.1" id="Layer_1" viewBox="-120 -100 750 750" xmlSpace="preserve">
+        <g>
+	        <g>
+		        <g>
+			        <rect x="170.667" y="234.667" width="64" height="64"/>
+			        <rect x="277.333" y="341.333" width="64" height="64"/>
+			        <rect x="170.667" y="341.333" width="64" height="64"/>
+			        <rect x="170.667" y="149.333" width="170.667" height="42.667"/>
+			        <rect x="277.333" y="234.667" width="64" height="64"/>
+			        <path d="M348.821,0H42.667v512h426.667V96.427L348.821,0z M384,192v42.667V448H128V234.667V192v-85.333h256V192z"/>
+		        </g>
+	        </g>
+        </g>
+      </svg>
+    </button></a>) : ''
+  
 
   return (
-    <PageWrapper header="Заказы">
+    <PageWrapper header="Заказы" button={button}>
       {window.sessionStorage.getItem('is_admin') === 'true' ? 
       <div className={`${shoes.length ? "opacity-100 viisble" : "opacity-0 invisible"} transition-opacity duration-500`}>
       <article className="grid grid-cols-5  px-10 py-5 text-white text-center">

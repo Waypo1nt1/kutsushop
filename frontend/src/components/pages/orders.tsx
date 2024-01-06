@@ -21,7 +21,7 @@ const Orders = () => {
         })
       }, [])
 
-      const button = window.sessionStorage.getItem('is_admin') === 'true' ? (<a target="_blank" href="http://localhost:3000/excel"><button className="w-8 h-8 bg-blue-500 items-center justify-center rounded-full border border-white">
+      const button_excel = window.sessionStorage.getItem('is_admin') === 'true' ? (<a className="h-8" target="_blank" href="http://localhost:3000/excel"><button className="w-8 h-8 bg-blue-500 items-center justify-center rounded-full border border-white">
       <svg className="block mx-auto my-auto" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" fill="#ffffff" version="1.1" id="Layer_1" viewBox="-120 -100 750 750" xmlSpace="preserve">
         <g>
 	        <g>
@@ -37,10 +37,15 @@ const Orders = () => {
         </g>
       </svg>
     </button></a>) : ''
+      const button_add = <a target="_blank" href="http://localhost:5173/form"><button className="w-8 h-8 bg-blue-500 items-center justify-center rounded-full border border-white">
+                          <svg className="mx-auto my-auto" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 12H20M12 4V20" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          </button></a>
   
 
   return (
-    <PageWrapper header="Заказы" button={button}>
+    <PageWrapper header="Заказы" buttons={[button_excel, button_add]}>
       {window.sessionStorage.getItem('is_admin') === 'true' ? 
       <div className={`${shoes.length ? "opacity-100 viisble" : "opacity-0 invisible"} transition-opacity duration-500`}>
       <article className="grid grid-cols-6  px-10 py-5 text-white text-center">
@@ -49,7 +54,7 @@ const Orders = () => {
             <div className="underline text-xl">Общая сумма</div>
             <div className="underline text-xl">Id продавца</div>
             <div className="underline text-xl">Количество</div>
-            <div className="underline text-xl">Дата</div>
+            <div className="underline text-xl">Дата создания</div>
           </article>
         {shoes.map((shoe) => (
           <article key={shoe.id} className={`grid grid-cols-6 bg-[#333333] px-10 py-5 border mb-3 text-center`}>

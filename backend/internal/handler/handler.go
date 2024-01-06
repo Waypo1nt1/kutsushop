@@ -32,6 +32,7 @@ func (h *Handler) GetAllData(w http.ResponseWriter, r *http.Request) {
 
 	data, _, _ := h.client.From(tableParam).Select("*", "exact", false).Execute()
 
+	//fmt.Println(string(data[:]))
 	w.Write(data)
 }
 

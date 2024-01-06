@@ -27,6 +27,7 @@ export function LoginForm({handleLogin}: Props  ) {
       const target = event.target as EventTarget & Record<"email" | "password" ,{value: string}>
       const email = target.email.value
       const password = target.password.value
+      //const position = target.position.value
 
       data.forEach(item => {
         if (item.email === email && item.password === password) {

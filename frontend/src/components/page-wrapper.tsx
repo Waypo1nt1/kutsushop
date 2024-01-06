@@ -1,10 +1,10 @@
 interface Props {
   header: string
   children: React.ReactNode
-  button?: React.ReactNode 
+  buttons?: React.ReactNode 
 }
 
-const PageWrapper = ({header, children, button}: Props) => {
+const PageWrapper = ({header, children, buttons}: Props) => {
   return (
     <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
       <div className=" bg-slate-800 z-10 top-0 h-16 border-b lg:py-2.5">
@@ -13,7 +13,7 @@ const PageWrapper = ({header, children, button}: Props) => {
         <h4 hidden className="text-xl text-white font-medium lg:block">
           {header}
         </h4>
-          {button}
+          {buttons}
         </div>
         <button className="w-12 h-16 -mr-2 border-r lg:hidden">
           <svg

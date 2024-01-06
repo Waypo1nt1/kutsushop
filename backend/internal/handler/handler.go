@@ -8,7 +8,7 @@ import (
 
 	"github.com/supabase-community/supabase-go"
 	"github.com/xuri/excelize/v2"
-	"github.com/kutsushop/internal/pipes/jsonh"
+	"github.com/kutsushop/internal/pipes"
 )
 
 type Handler struct {
@@ -119,8 +119,9 @@ func (h *Handler) GetExcelFile(w http.ResponseWriter, r *http.Request) {
 
 	data, _, _ := h.client.From("sale_of_shoes").Select("*", "", false).Execute()
 	
+	var excel_data []map[string]any
+	pipes.FromJson(data, &excel_data)
 
-	
 	f := excelize.NewFile()
 	defer func() {
 		if err := f.Close(); err != nil {
@@ -138,7 +139,14 @@ func (h *Handler) GetExcelFile(w http.ResponseWriter, r *http.Request) {
 	f.SetCellValue("Заказы", "C1", "Общая сумма")
 	f.SetCellValue("Заказы", "D1", "ID продавца")
 	f.SetCellValue("Заказы", "E1", "Количество")
-	f.SetCellValue("Заказы", "A2", fmt.Sprintf("%s", string(data[0])))
+	
+	for i, item := range excel_data {
+		f.SetCellValue("Заказы", fmt.Sprintf("A%d", i+2), item["id"])
+		f.SetCellValue("Заказы", fmt.Sprintf("B%d", i+2), item["shoes_id"])
+		f.SetCellValue("Заказы", fmt.Sprintf("C%d", i+2), item["proceed"])
+		f.SetCellValue("Заказы", fmt.Sprintf("D%d", i+2), item["seller_id"])
+		f.SetCellValue("Заказы", fmt.Sprintf("E%d", i+2), item["shoes_sale_amount"])
+	}
 
 	f.SetActiveSheet(index)
 

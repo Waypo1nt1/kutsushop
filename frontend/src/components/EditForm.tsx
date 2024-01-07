@@ -10,8 +10,10 @@ function useQuery() {
   
 
 
-export default function EditForm(id: any) {
+export default function EditForm() {
     let query = useQuery()
+    console.log(query.get("id"))
+    console.log(query.get("middlename"))
 
     const onSubmit = (event: React.FormEvent) => {
     event.preventDefault()
@@ -32,8 +34,8 @@ export default function EditForm(id: any) {
 
     axios
       .post('http://localhost:3000/create_users', {
-        email: String(target.email.value),
-        password: String(target.password.value),
+        id: Number(query.get("uid")),
+        position: String(query.get("position")),
       })
       .then(() => {
         console.log('users post success')
@@ -47,44 +49,36 @@ export default function EditForm(id: any) {
           <div className="w-full">
             <h1 className="text-center text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Редактирование продавца с id {query.get("id")}</h1>
             <p className="text-center text-white mb-6">Укажите информацию о продавце</p>
-            <form onSubmit={onSubmit} className="w-1/3 mx-auto">
+            <form onSubmit={onSubmit} className="w-1/2 mx-auto">
               <div className="flex w-full justify-between">
                 <div className="mb-4">
                   <label className="block text-sm font-bold mb-2">Фамилия</label>
-                  <input name="surname" placeholder="Введите фамилию" className="shadow appearance-none border rounded w-full py-2 px-3"></input>
+                  <input name="surname" defaultValue={query.get("surname")} className="shadow appearance-none border rounded w-full py-2 px-3"></input>
                 </div>
                 <div className="mb-4">
                   <label className="block text-sm font-bold mb-2">Имя</label>
-                  <input name="name" placeholder="Введите имя" className="shadow appearance-none border rounded w-full py-2 px-3"></input>
+                  <input name="name" defaultValue={query.get("name")} placeholder="Введите имя" className="shadow appearance-none border rounded w-full py-2 px-3"></input>
                 </div>
               </div>
               <div className="mb-8 flex flex-col items-center">
                 <label className="block text-sm font-bold mb-2">Отчество</label>
-                <input name="middlename" placeholder="Введите отчество" className="shadow appearance-none border rounded w-1/2 py-2 px-3"></input>
+                <input name="middlename" defaultValue={query.get("middlename")} placeholder="Введите отчество" className="shadow appearance-none border rounded w-1/2 py-2 px-3"></input>
               </div>
               <div className="mb-10 flex flex-col items-center">
                 <label className="block text-sm font-bold mb-2">Номер телефона</label>
                 <input
                   name="phone_number"
+                  defaultValue={query.get("phone_number")}
                   placeholder="Введите номер телефона"
                   className="shadow appearance-none border rounded w-1/2 py-2 px-3"></input>
               </div>
-              <p className="text-center text-white mb-6">Создайте данные для входа в аккаунт продавца</p>
-              <div className="mb-4 flex flex-col items-center">
-                <label className="block text-sm font-bold mb-2">Email</label>
+              <div className="mb-10 flex flex-col items-center">
+                <label className="block text-sm font-bold mb-2">Должность</label>
                 <input
-                  type="email"
-                  name="email"
-                  placeholder="Введите Email"
-                  className="shadow appearance-none border rounded w-full py-2 px-3"></input>
-              </div>
-              <div className="mb-4 flex flex-col items-center">
-                <label className="block text-sm font-bold mb-2">Пароль</label>
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Введите Пароль"
-                  className="shadow appearance-none border rounded w-full py-2 px-3"></input>
+                  name="position"
+                  defaultValue={query.get("position")}
+                  placeholder="Введите должность"
+                  className="shadow appearance-none border rounded w-1/2 py-2 px-3"></input>
               </div>
               <button type="submit" className="btn btn-neutral mt-5">
                 {' '}

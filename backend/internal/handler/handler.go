@@ -98,6 +98,7 @@ func (h *Handler) CreateSellers(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) CreateUsers(w http.ResponseWriter, r *http.Request) {
 	type Payload struct {
+		id int `json:"id"`
 		Email string `json:"email"`
 		Password string `json:"password"`
 	}
@@ -106,6 +107,7 @@ func (h *Handler) CreateUsers(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&p)
 
 	data_to_insert := map[string]any{
+		"id": p.id,
 		"email": p.Email,
 		"password": p.Password,
 		"is_admin": false,

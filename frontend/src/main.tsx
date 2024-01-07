@@ -10,6 +10,7 @@ import Supplies from './components/pages/supplies'
 import Sellers from './components/pages/sellers'
 import ProductForm from './components/ProductForm'
 import AdminForm from './components/AdminForm'
+import EditForm from './components/EditForm.tsx'
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: '/adminform',
     element: <AdminForm />,
+  },
+  {
+    path: '/editform',
+    element: <EditForm />,
   },
 ])
 

@@ -2,11 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import Orders from "./components/pages/orders"
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Orders from './components/pages/orders'
 import Shoes from './components/pages/shoes'
 import Suppliers from './components/pages/suppliers'
 import Supplies from './components/pages/supplies'
@@ -16,43 +13,43 @@ import AdminForm from './components/AdminForm'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     children: [
       {
-        path: "viewdata/shoes",
+        path: 'viewdata/shoes',
         element: <Shoes />,
       },
       {
-        path: "viewdata/supplies",
+        path: 'viewdata/supplies',
         element: <Supplies />,
       },
       {
-        path: "viewdata/orders",
+        path: 'viewdata/orders',
         element: <Orders />,
       },
       {
-        path: "viewdata/suppliers",
+        path: 'viewdata/suppliers',
         element: <Suppliers />,
       },
       {
-        path: "viewdata/sellers",
+        path: 'viewdata/sellers',
         element: <Sellers />,
       },
     ],
   },
   {
-    path: "/form",
-    element: <ProductForm />
+    path: '/form',
+    element: <ProductForm />,
   },
   {
-    path: "/adminform",
-    element: <AdminForm />
+    path: '/adminform',
+    element: <AdminForm />,
   },
-]);
+])
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
-  </React.StrictMode>,
+    <RouterProvider router={router} />
+  </React.StrictMode>
 )

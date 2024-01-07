@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
-import {Footer} from './components/Footer'
-import {AdminPanel} from './components/AdminPanel'
-import {LoginForm} from './components/LoginForm'
+import { Footer } from './components/Footer'
+import { AdminPanel } from './components/AdminPanel'
+import { LoginForm } from './components/LoginForm'
 
 import './index.css'
-
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false)
@@ -16,8 +15,8 @@ function App() {
     window.sessionStorage.setItem('email', email)
     window.sessionStorage.setItem('position', '')
   }
-  
-  useEffect (() => {
+
+  useEffect(() => {
     if (window.sessionStorage.getItem('is_auth') === 'true') {
       setLoggedIn(true)
     }
@@ -25,7 +24,7 @@ function App() {
 
   return (
     <>
-    {isLoggedIn ? <AdminPanel handleLogin={handleLogin} /> : <LoginForm handleLogin={handleLogin}/>}
+      {isLoggedIn ? <AdminPanel handleLogin={handleLogin} /> : <LoginForm handleLogin={handleLogin} />}
       <Footer />
     </>
   )

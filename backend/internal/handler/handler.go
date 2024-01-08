@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/kutsushop/internal/pipes"
 	"github.com/supabase-community/supabase-go"
 	"github.com/xuri/excelize/v2"
-	"github.com/kutsushop/internal/pipes"
 )
 
 type Handler struct {
@@ -75,9 +75,9 @@ func (h *Handler) CreateShoesSales(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) CreateSellers(w http.ResponseWriter, r *http.Request) {
 	type Payload struct {
-		Surname string `json:"surname"`
-		Name string `json:"name"`
-		MiddleName string `json:"middle_name"`
+		Surname     string `json:"surname"`
+		Name        string `json:"name"`
+		MiddleName  string `json:"middle_name"`
 		PhoneNumber string `json:"phone_number"`
 	}
 	var p Payload
@@ -85,9 +85,9 @@ func (h *Handler) CreateSellers(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&p)
 
 	data_to_insert := map[string]any{
-		"surname": p.Surname,
-		"name": p.Name,
-		"middle_name": p.MiddleName,
+		"surname":      p.Surname,
+		"name":         p.Name,
+		"middle_name":  p.MiddleName,
 		"phone_number": p.PhoneNumber,
 	}
 
@@ -98,8 +98,7 @@ func (h *Handler) CreateSellers(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) CreateUsers(w http.ResponseWriter, r *http.Request) {
 	type Payload struct {
-		id int `json:"id"`
-		Email string `json:"email"`
+		Email    string `json:"email"`
 		Password string `json:"password"`
 	}
 	var p Payload
@@ -107,8 +106,7 @@ func (h *Handler) CreateUsers(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&p)
 
 	data_to_insert := map[string]any{
-		"id": p.id,
-		"email": p.Email,
+		"email":    p.Email,
 		"password": p.Password,
 		"is_admin": false,
 	}
@@ -118,10 +116,54 @@ func (h *Handler) CreateUsers(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 }
 
+func (h *Handler) UpdateUsers(w http.ResponseWriter, r *http.Request) {
+
+	type Payload struct {
+		Id       int    `json:"id"`
+		Position string `json:"position"`
+	}
+
+	var p Payload
+
+	json.NewDecoder(r.Body).Decode(&p)
+
+	data_to_update := map[string]any{
+		"id":       p.Id,
+		"position": p.Position,
+	}
+	h.client.From("users").Update(data_to_update, "", "").Eq("id", strconv.Itoa(p.Id)).Execute()
+}
+
+func (h *Handler) UpdateSellers(w http.ResponseWriter, r *http.Request) {
+
+	type Payload struct {
+		Id          int    `json:"id"`
+		Surname     string `json:"surname"`
+		Name        string `json:"name"`
+		MiddleName  string `json:"middle_name"`
+		PhoneNumber string `json:"phone_number"`
+	}
+
+	var p Payload
+
+	json.NewDecoder(r.Body).Decode(&p)
+
+	data_to_update := map[string]any{
+		"id":           p.Id,
+		"surname":      p.Surname,
+		"name":         p.Name,
+		"middle_name":  p.MiddleName,
+		"phone_number": p.PhoneNumber,
+	}
+
+	
+	fmt.Println(data_to_update)
+}
+
 func (h *Handler) GetExcelFile(w http.ResponseWriter, r *http.Request) {
 
 	data, _, _ := h.client.From("sale_of_shoes").Select("*", "", false).Execute()
-	
+
 	var excel_data []map[string]any
 	pipes.FromJson(data, &excel_data)
 
@@ -131,7 +173,7 @@ func (h *Handler) GetExcelFile(w http.ResponseWriter, r *http.Request) {
 			fmt.Println(err)
 		}
 	}()
-	
+
 	index, err := f.NewSheet("заказы")
 	if err != nil {
 		fmt.Println(err)

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 function useQuery() {
@@ -11,17 +11,17 @@ function useQuery() {
 
 
 export default function EditForm() {
+    const [pressed, setPressed] = useState(false)
     let query = useQuery()
-    console.log(query.get("id"))
-    console.log(query.get("middlename"))
 
     const onSubmit = (event: React.FormEvent) => {
+    setPressed(true)
     event.preventDefault()
 
-    const target = event.target as EventTarget & Record<'surname' | 'name' | 'middlename' | 'phone_number' | 'email' | 'password', { value: string }>
+    const target = event.target as EventTarget & Record<'surname' | 'name' | 'middlename' | 'phone_number' | 'email' | 'password' | 'position', { value: string }>
 
     axios
-      .post('http://localhost:3000/create_sellers', {
+      .post('http://localhost:3000/update_sellers', {
         id: Number(query.get("id")),
         surname: String(target.surname.value),
         name: String(target.name.value),
@@ -33,9 +33,9 @@ export default function EditForm() {
       })
 
     axios
-      .post('http://localhost:3000/create_users', {
+      .post('http://localhost:3000/update_users', {
         id: Number(query.get("uid")),
-        position: String(query.get("position")),
+        position: String(target.position.value),
       })
       .then(() => {
         console.log('users post success')
@@ -80,6 +80,7 @@ export default function EditForm() {
                   placeholder="Введите должность"
                   className="shadow appearance-none border rounded w-1/2 py-2 px-3"></input>
               </div>
+              {pressed ? <p className="text-green-500">Редактирование успешно!</p> : ''}
               <button type="submit" className="btn btn-neutral mt-5">
                 {' '}
                 Добавить{' '}

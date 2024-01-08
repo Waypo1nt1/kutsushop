@@ -41,6 +41,9 @@ func main() {
 
 	r.Get("/excel", h_data.GetExcelFile)
 
+	r.Post("/update_users", h_users.UpdateUsers)
+	r.Post("/update_sellers", h_data.UpdateSellers)
+
 
 	http.ListenAndServe(":3000", r)
 }

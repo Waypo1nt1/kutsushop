@@ -1,7 +1,10 @@
 import axios from 'axios'
+import { useState } from 'react'
 
 export default function AdminForm() {
+  const [pressed, setPressed] = useState(false)
   const onSubmit = (event: React.FormEvent) => {
+    setPressed(true)
     event.preventDefault()
 
     const target = event.target as EventTarget & Record<'surname' | 'name' | 'middlename' | 'phone_number' | 'email' | 'password', { value: string }>
@@ -73,6 +76,7 @@ export default function AdminForm() {
                   placeholder="Введите Пароль"
                   className="shadow appearance-none border rounded w-full py-2 px-3"></input>
               </div>
+              {pressed ? <p className="text-green-500">Добавление успешно!</p> : ''}
               <button type="submit" className="btn btn-neutral mt-5">
                 {' '}
                 Добавить{' '}

@@ -160,20 +160,6 @@ func (h *Handler) UpdateSellers(w http.ResponseWriter, r *http.Request) {
 	h.client.From("sellers").Update(data_to_update, "", "").Eq("id", strconv.Itoa(p.Id)).Execute()
 }
 
-func (h *Handler) GetPosition (w http.ResponseWriter, r *http.Request) {
-	type Payload struct {
-		Email string `json:"email"`
-	}
-
-	var p Payload
-
-	json.NewDecoder(r.Body).Decode(&p)
-
-	data, _, _ := h.client.From("users").Select("position", "", false).Eq("email", p.Email).Execute()
-	
-	w.Write(data)
-}
-
 func (h *Handler) GetExcelFile(w http.ResponseWriter, r *http.Request) {
 
 	data, _, _ := h.client.From("sale_of_shoes").Select("*", "", false).Execute()

@@ -9,6 +9,7 @@ interface Users {
   email: string
   password: string
   is_admin: boolean
+  position: string
 }
 
 export function LoginForm({ handleLogin }: Props) {
@@ -28,15 +29,12 @@ export function LoginForm({ handleLogin }: Props) {
     const target = event.target as EventTarget & Record<'email' | 'password', { value: string }>
     const email = target.email.value
     const password = target.password.value
-    //const position = target.position.value
 
-    data.forEach(item => {
+    data.map((item) => {
       console.log(validpass, item)
-      //console.log(item)
+
       if (item.email === email && item.password === password) {
-        axios.post('http://localhost:3000/position', {email: String(item.email)}).then(response => {
-          handleLogin(true, item.is_admin, item.email, response.data[0].position)
-      })
+          handleLogin(true, item.is_admin, item.email, item.position)
         setValidpass(true)
       }
     })

@@ -31,12 +31,13 @@ export function LoginForm({ handleLogin }: Props) {
     //const position = target.position.value
 
     data.forEach(item => {
+      console.log(validpass, item)
       //console.log(item)
       if (item.email === email && item.password === password) {
         axios.post('http://localhost:3000/position', {email: String(item.email)}).then(response => {
           handleLogin(true, item.is_admin, item.email, response.data[0].position)
-          setValidpass(true)
       })
+        setValidpass(true)
       }
     })
     console.log(validpass)

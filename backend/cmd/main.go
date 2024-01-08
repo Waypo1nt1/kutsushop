@@ -44,6 +44,8 @@ func main() {
 	r.Post("/update_users", h_users.UpdateUsers)
 	r.Post("/update_sellers", h_data.UpdateSellers)
 
+	r.Post("/position", h_users.GetPosition)
+
 
 	http.ListenAndServe(":3000", r)
 }

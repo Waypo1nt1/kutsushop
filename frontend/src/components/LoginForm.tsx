@@ -14,6 +14,7 @@ interface Users {
 export function LoginForm({ handleLogin }: Props) {
   const [data, setData] = useState<Users[]>([])
   const [invalidpass, setInvalidpass] = useState(false)
+  const [validpass, setValidpass] = useState(false)
 
   useEffect(() => {
     axios.get('http://localhost:3000/users?table=users').then(response => {
@@ -30,12 +31,18 @@ export function LoginForm({ handleLogin }: Props) {
     //const position = target.position.value
 
     data.forEach(item => {
+      //console.log(item)
       if (item.email === email && item.password === password) {
-        handleLogin(true, item.is_admin, item.email, '')
-      } else {
-        setInvalidpass(true)
+        axios.post('http://localhost:3000/position', {email: String(item.email)}).then(response => {
+          handleLogin(true, item.is_admin, item.email, response.data[0].position)
+          setValidpass(true)
+      })
       }
     })
+    console.log(validpass)
+    if (!validpass) {
+      setInvalidpass(true)
+    }
   }
   return (
     <div className="flex min-h-screen items-center justify-center bg-white dark:bg-gray-950 p-12">

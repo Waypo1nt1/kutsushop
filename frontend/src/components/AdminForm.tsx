@@ -55,6 +55,8 @@ export default function AdminForm() {
               <div className="mb-10 flex flex-col items-center">
                 <label className="block text-sm font-bold mb-2">Номер телефона</label>
                 <input
+                  pattern="[78][0-9]{10}"
+                  type="tel"
                   name="phone_number"
                   placeholder="Введите номер телефона"
                   className="shadow appearance-none border rounded w-1/2 py-2 px-3"></input>

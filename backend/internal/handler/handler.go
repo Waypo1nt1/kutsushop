@@ -91,6 +91,7 @@ func (h *Handler) CreateSellers(w http.ResponseWriter, r *http.Request) {
 		"phone_number": p.PhoneNumber,
 	}
 
+	fmt.Println(data_to_insert)
 	h.client.From("sellers").Insert(data_to_insert, false, "", "", "").Execute()
 
 	w.WriteHeader(http.StatusCreated)

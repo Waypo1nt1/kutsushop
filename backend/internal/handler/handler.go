@@ -91,7 +91,6 @@ func (h *Handler) CreateSellers(w http.ResponseWriter, r *http.Request) {
 		"phone_number": p.PhoneNumber,
 	}
 
-	fmt.Println(data_to_insert)
 	h.client.From("sellers").Insert(data_to_insert, false, "", "", "").Execute()
 
 	w.WriteHeader(http.StatusCreated)
@@ -132,6 +131,7 @@ func (h *Handler) UpdateUsers(w http.ResponseWriter, r *http.Request) {
 		"id":       p.Id,
 		"position": p.Position,
 	}
+
 	h.client.From("users").Update(data_to_update, "", "").Eq("id", strconv.Itoa(p.Id)).Execute()
 }
 
@@ -156,9 +156,8 @@ func (h *Handler) UpdateSellers(w http.ResponseWriter, r *http.Request) {
 		"middle_name":  p.MiddleName,
 		"phone_number": p.PhoneNumber,
 	}
-
 	
-	fmt.Println(data_to_update)
+	h.client.From("sellers").Update(data_to_update, "", "").Eq("id", strconv.Itoa(p.Id)).Execute()
 }
 
 func (h *Handler) GetExcelFile(w http.ResponseWriter, r *http.Request) {

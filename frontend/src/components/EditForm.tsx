@@ -67,6 +67,7 @@ export default function EditForm() {
               <div className="mb-10 flex flex-col items-center">
                 <label className="block text-sm font-bold mb-2">Номер телефона</label>
                 <input
+                  pattern="[78][0-9]{10}"
                   name="phone_number"
                   defaultValue={query.get("phone_number")}
                   placeholder="Введите номер телефона"

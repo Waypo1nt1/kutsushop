@@ -8,12 +8,12 @@ import './index.css'
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false)
 
-  const handleLogin = (flag: boolean, isAdmin: boolean, email: string) => {
+  const handleLogin = (flag: boolean, isAdmin: boolean, email: string, position: string) => {
     setLoggedIn(flag)
     window.sessionStorage.setItem('is_auth', String(flag))
     window.sessionStorage.setItem('is_admin', String(isAdmin))
     window.sessionStorage.setItem('email', email)
-    window.sessionStorage.setItem('position', '')
+    window.sessionStorage.setItem('position', position)
   }
 
   useEffect(() => {

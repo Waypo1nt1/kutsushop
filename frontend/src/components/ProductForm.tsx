@@ -15,6 +15,7 @@ interface Seller {
 }
 
 export default function ProductForm() {
+  const [pressed, setpressed] = useState(false)
   const [shoes, setShoes] = useState<Shoes[]>([])
   const [sellers, setSellers] = useState<Seller[]>([])
 
@@ -30,6 +31,7 @@ export default function ProductForm() {
   }, [])
 
   const onSubmit = (event: React.FormEvent) => {
+    setpressed(true)
     event.preventDefault()
 
     const target = event.target as EventTarget & Record<'shoes_name' | 'seller' | 'shoes_count' | 'shoes_price', { value: string }>
@@ -101,6 +103,7 @@ export default function ProductForm() {
                   ))}
                 </select>
               </div>
+              {pressed ? <p className="text-green-500">Заказ успешно добавлен</p> : ''}
               <button type="submit" className="btn btn-neutral mt-5">
                 {' '}
                 Добавить{' '}

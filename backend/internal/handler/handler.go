@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/kutsushop/internal/pipes"
 	"github.com/supabase-community/supabase-go"
@@ -160,6 +161,9 @@ func (h *Handler) UpdateSellers(w http.ResponseWriter, r *http.Request) {
 	h.client.From("sellers").Update(data_to_update, "", "").Eq("id", strconv.Itoa(p.Id)).Execute()
 }
 
+func Split(r rune) bool {
+	return r == '-' || r == 'T' || r == '.'
+}
 func (h *Handler) GetExcelFile(w http.ResponseWriter, r *http.Request) {
 
 	data, _, _ := h.client.From("sale_of_shoes").Select("*", "", false).Execute()
@@ -184,6 +188,13 @@ func (h *Handler) GetExcelFile(w http.ResponseWriter, r *http.Request) {
 	f.SetCellValue("Заказы", "C1", "Общая сумма")
 	f.SetCellValue("Заказы", "D1", "ID продавца")
 	f.SetCellValue("Заказы", "E1", "Количество")
+	f.SetCellValue("Заказы", "F1", "Дата создания")
+	type Target struct {
+		Year string
+		Month string
+		Day string
+		Time string
+	}
 
 	for i, item := range excel_data {
 		f.SetCellValue("Заказы", fmt.Sprintf("A%d", i+2), item["id"])
@@ -191,6 +202,12 @@ func (h *Handler) GetExcelFile(w http.ResponseWriter, r *http.Request) {
 		f.SetCellValue("Заказы", fmt.Sprintf("C%d", i+2), item["proceed"])
 		f.SetCellValue("Заказы", fmt.Sprintf("D%d", i+2), item["seller_id"])
 		f.SetCellValue("Заказы", fmt.Sprintf("E%d", i+2), item["shoes_sale_amount"])
+		
+		date_created := strings.FieldsFunc(item["date_created"].(string), Split)
+
+		t := Target{date_created[0], date_created[1], date_created[2], date_created[3]}
+
+		f.SetCellValue("Заказы", fmt.Sprintf("F%d", i+2), strings.Trim(fmt.Sprintf("%v", t), "{}"))
 	}
 
 	f.SetActiveSheet(index)
